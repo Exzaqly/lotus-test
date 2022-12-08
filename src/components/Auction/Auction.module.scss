@@ -1,0 +1,53 @@
+.auction {
+  &_page {
+    width: 1440px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_table {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &_header {
+      height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .move {
+        height: 40px;
+        margin-bottom: 18px;
+      }
+
+      .params {
+        height: 60px;
+      }
+    }
+  }
+
+  &_header {
+    font-size: 24px;
+    color: red;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    span {
+      font-weight: 700;
+    }
+  }
+
+  &_warning {
+    padding: 4px;
+    align-self: flex-start;
+    background-color: #e9e9e9;
+    color: red;
+    margin-bottom: 50px;
+  }
+}
+
+.participant_container {
+  padding-top: 39px;
+}
