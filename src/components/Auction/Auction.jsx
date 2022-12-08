@@ -1,17 +1,24 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { auctionSelector, periodSelector } from '../../redux/selectors'
 import { timerParams } from '../../helpers/timerParams'
 import s from './Auction.module.scss'
 import { Timer } from '../Timer/Timer'
 import { Participant } from '../Participant/Participant'
+import { getAuction } from '../../redux/auctionReducer'
 
 export const Auction = () => {
+  const dispatch = useDispatch()
   const params = useParams()
   const auction = useSelector(auctionSelector)
   const period = useSelector(periodSelector)
   const [timer, setTimer] = useState({})
+
+  useEffect(() => {
+    dispatch(getAuction(params.id))
+  }, [])
+
   useEffect(() => {
     setTimer(timerParams(auction.startedAt, period, auction.participants.length))
     const timerInterval = setInterval(() => {
@@ -27,7 +34,7 @@ export const Auction = () => {
         Ход торгов <span>{auction.name}</span>
       </div>
       <div className={s.auction_warning}>
-        Уважаемые участники, во время вашего хода вы можете изменить параметры тогров, указанных в таблице:
+        Уважаемые участники, во время вашего хода вы можете изменить параметры торгов, указанных в таблице:
       </div>
       <div className={s.auction_table}>
         <div className={s.auction_table_header}>

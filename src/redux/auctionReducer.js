@@ -1,4 +1,5 @@
-import { auctionAPI } from '../api/auction'
+import axios from 'axios'
+
 
 const SET_AUCTION = 'auction/SET_AUCTION'
 
@@ -43,7 +44,8 @@ export const auctionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUCTION: {
       return {
-        ...action.payload
+        ...state,
+        auction: { ...action.payload }
       }
     }
     default:
@@ -56,6 +58,10 @@ const actions = {
 }
 
 export const getAuction = (id) => async (dispatch) => {
-  const auction = await auctionAPI.getAuction(id)
-  dispatch(actions.setAuction(auction))
+  try {
+    const auction = await axios.get(`/auctions/${id}`).then(res => res.data)
+    dispatch(actions.setAuction(auction))
+  }catch (e) {
+    console.error(e)
+  }
 }

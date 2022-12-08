@@ -1,0 +1,46 @@
+const mongoose = require("mongoose");
+
+const ParticipantSchema = new mongoose.Schema({
+  name: {
+    type: String,
+      required: true,
+  },
+  paymentTerms: {
+    type: Number,
+      required: true,
+  },
+  warranty: {
+    type: Number,
+      required: true,
+  },
+  productionTime: {
+    type: Number,
+      required: true,
+  },
+  hasEventsThatRaisingQuality: {
+    type: Boolean,
+      required: true,
+  },
+})
+
+const AuctionSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  startedAt: {
+    type: Number,
+    required: true,
+  },
+  participants: {
+    type: [ParticipantSchema]
+  },
+})
+
+const Auction = mongoose.model('Auction', AuctionSchema)
+
+module.exports = {Auction}

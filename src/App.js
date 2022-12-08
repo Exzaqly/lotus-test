@@ -6,8 +6,8 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path={'/auction/:id'} element={<Auction />} />
-        <Route path={'*'} element={<NavLink to={'/auction/1'}>auc</NavLink>} />
+        <Route path={'/auctions/:id'} element={<Auction />} />
+        <Route path={'*'} element={<NavLink className={'link'} to={'/auctions/63926d66711605d2bec2123e'}>Show auction</NavLink>} />
       </Routes>
     </div>
   )
