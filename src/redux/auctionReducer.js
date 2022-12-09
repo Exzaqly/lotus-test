@@ -11,6 +11,7 @@ const initialState = {
     participants: [
       {
         name: 'participant1',
+        isOnline: true,
         paymentTerms: 10,
         warranty: 36,
         productionTime: 50,
@@ -18,6 +19,7 @@ const initialState = {
       },
       {
         name: 'participant2',
+        isOnline: true,
         paymentTerms: 10,
         warranty: 36,
         productionTime: 50,
@@ -25,6 +27,7 @@ const initialState = {
       },
       {
         name: 'participant3',
+        isOnline: true,
         paymentTerms: 10,
         warranty: 36,
         productionTime: 50,
@@ -32,6 +35,7 @@ const initialState = {
       },
       {
         name: 'participant3',
+        isOnline: true,
         paymentTerms: 10,
         warranty: 36,
         productionTime: 50,

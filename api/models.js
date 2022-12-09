@@ -1,25 +1,29 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const ParticipantSchema = new mongoose.Schema({
   name: {
     type: String,
-      required: true,
+    required: true,
+  },
+  isOnline: {
+    type: Boolean,
+    required: true,
   },
   paymentTerms: {
     type: Number,
-      required: true,
+    required: true,
   },
   warranty: {
     type: Number,
-      required: true,
+    required: true,
   },
   productionTime: {
     type: Number,
-      required: true,
+    required: true,
   },
-  hasEventsThatRaisingQuality: {
+  hasRaisingQualityEvents: {
     type: Boolean,
-      required: true,
+    required: true,
   },
 })
 
@@ -37,10 +41,10 @@ const AuctionSchema = new mongoose.Schema({
     required: true,
   },
   participants: {
-    type: [ParticipantSchema]
+    type: [ParticipantSchema],
   },
 })
 
 const Auction = mongoose.model('Auction', AuctionSchema)
 
-module.exports = {Auction}
+module.exports = { Auction }

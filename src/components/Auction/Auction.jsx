@@ -46,15 +46,15 @@ export const Auction = () => {
               Параметры и требования
             </div>
           </div>
-          <div className={s.block}>
+          <div>
             Наличие комплекса мероприятий, повышающих стандарты качества изготовления
           </div>
-          <div className={s.block}>
+          <div>
             Срок изготовления лота, дней
           </div>
-          <div className={s.block}>Гарантийный обязательства, мес</div>
-          <div className={s.block}>Условия оплаты</div>
-          <div className={s.block}>Стоимость изготовления лота, руб. (без НДС)</div>
+          <div>Гарантийный обязательства, мес</div>
+          <div>Условия оплаты</div>
+          <div>Стоимость изготовления лота, руб. (без НДС)</div>
         </div>
         {auction.participants.map((p, index) => {
           if (timer.currentParticipantIndex === index) {
@@ -62,7 +62,7 @@ export const Auction = () => {
               <div key={index}>
                 <Timer timerValue={timer.timerValue} />
                 <Participant index={index} name={p.name} hasEventThatRisingQuality={p.hasEventThatRisingQuality}
-                             productionTime={p.productionTime} warranty={p.warranty} paymentTerms={p.paymentTerms} />
+                             productionTime={p.productionTime} warranty={p.warranty} paymentTerms={p.paymentTerms} isOnline={p.isOnline} />
               </div>
             )
           }
