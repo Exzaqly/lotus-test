@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { auctionSelector, periodSelector } from '../../redux/selectors'
-import { timerParams } from '../../helpers/timerParams'
+import { auctionSelector } from '../../redux/selectors'
+import { getTimerState } from '../../helpers/getTimerState'
 import s from './Auction.module.scss'
 import { Timer } from '../Timer/Timer'
 import { Participant } from '../Participant/Participant'
@@ -12,22 +12,30 @@ export const Auction = () => {
   const dispatch = useDispatch()
   const params = useParams()
   const auction = useSelector(auctionSelector)
-  const period = useSelector(periodSelector)
   const [timer, setTimer] = useState({})
 
   useEffect(() => {
     dispatch(getAuction(params.id))
-  }, [])
+  }, [dispatch, params.id])
 
   useEffect(() => {
-    setTimer(timerParams(auction.startedAt, period, auction.participants.length))
+    if (!auction) {
+      return;
+    }
+    
+    setTimer(getTimerState(auction.startedAt, auction.participants.length))
     const timerInterval = setInterval(() => {
-      setTimer(timerParams(auction.startedAt, period, auction.participants.length))
+      setTimer(getTimerState(auction.startedAt, auction.participants.length))
     }, 1000)
     return () => {
       clearInterval(timerInterval)
     }
-  }, [])
+  }, [auction])
+
+  if (!auction) {
+    return <div>Loading...</div>
+  }
+  
   return (
     <div className={s.auction_page}>
       <div className={s.auction_header}>
@@ -70,7 +78,7 @@ export const Auction = () => {
             <div className={s.participant_container} key={index}>
               <Participant index={index} name={p.name} hasEventThatRisingQuality={p.hasEventThatRisingQuality}
                            productionTime={p.productionTime} warranty={p.warranty}
-                           paymentTerms={p.paymentTerms} />
+                           paymentTerms={p.paymentTerms} isOnline={p.isOnline}/>
             </div>
           )
         })}

@@ -28,10 +28,6 @@ const ParticipantSchema = new mongoose.Schema({
 })
 
 const AuctionSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     required: true,

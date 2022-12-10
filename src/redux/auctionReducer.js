@@ -1,47 +1,9 @@
 import axios from 'axios'
 
-
 const SET_AUCTION = 'auction/SET_AUCTION'
 
 const initialState = {
-  period: 120000,
-  auction: {
-    name: 'some lot',
-    startedAt: 1200000,
-    participants: [
-      {
-        name: 'participant1',
-        isOnline: true,
-        paymentTerms: 10,
-        warranty: 36,
-        productionTime: 50,
-        hasEventThatRisingQuality: false,
-      },
-      {
-        name: 'participant2',
-        isOnline: true,
-        paymentTerms: 10,
-        warranty: 36,
-        productionTime: 50,
-        hasEventThatRisingQuality: false,
-      },
-      {
-        name: 'participant3',
-        isOnline: true,
-        paymentTerms: 10,
-        warranty: 36,
-        productionTime: 50,
-        hasEventThatRisingQuality: false,
-      },
-      {
-        name: 'participant3',
-        isOnline: true,
-        paymentTerms: 10,
-        warranty: 36,
-        productionTime: 50,
-        hasEventThatRisingQuality: false,
-      }],
-  },
+  auction: null,
 }
 
 export const auctionReducer = (state = initialState, action) => {
@@ -63,8 +25,8 @@ const actions = {
 
 export const getAuction = (id) => async (dispatch) => {
   try {
-    const auction = await axios.get(`/auctions/${id}`).then(res => res.data)
-    dispatch(actions.setAuction(auction))
+    const { data } = await axios.get(`/api/auctions/${id}`)
+    dispatch(actions.setAuction(data))
   }catch (e) {
     console.error(e)
   }
